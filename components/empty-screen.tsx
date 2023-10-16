@@ -8,11 +8,11 @@ const exampleMessages = [
   {
     heading: 'Start Book Outline',
     message: `"I would like to begin the book outline"?`
-  },
-  {
-    heading: 'Continue Book Outline',
-    message: `"I would like to continue the book outline"?`
   }
+  // {
+  //   heading: 'Continue Book Outline',
+  //   message: `"I would like to continue the book outline"?`
+  // }
 ]
 
 export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
