@@ -22,7 +22,7 @@ export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
         <h1 className="mb-2 text-lg font-semibold">Welcome No Click Book!</h1>
         <p className="mb-2 leading-normal text-muted-foreground"></p>
         <p className="leading-normal text-muted-foreground">
-          You can start a conversation by typing a message below.
+          You can start a conversation here:
         </p>
         <div className="mt-4 flex flex-col items-start space-y-2">
           {exampleMessages.map((message, index) => (
