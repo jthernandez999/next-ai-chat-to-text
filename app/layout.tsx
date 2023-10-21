@@ -16,8 +16,8 @@ export const metadata: Metadata = {
   description:
     'An AI-powered chatbot to help write a book built with Next.js and Vercel.',
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: 'white' },
-    { media: '(prefers-color-scheme: dark)', color: 'black' }
+    { media: '(prefers-color-scheme: light)', color: 'white' }
+    // { media: '(prefers-color-scheme: dark)', color: 'black' }
   ],
   icons: {
     icon: '/favicon.ico',
