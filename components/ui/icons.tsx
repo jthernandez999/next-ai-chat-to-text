@@ -476,6 +476,31 @@ function IconChevronUpDown({
   )
 }
 
+function IconCancel({ className, ...props }: React.ComponentProps<'svg'>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 256 256"
+      fill="none"
+      className={cn('h-4 w-4', className)}
+      {...props}
+    >
+      <circle
+        cx="128"
+        cy="128"
+        r="96"
+        stroke="currentColor"
+        strokeWidth="16"
+        fill="none"
+      />
+      <path
+        d="M105.373 105.373a8 8 0 0 0-11.314 0l-24.834 24.835a8 8 0 0 0 0 11.313L128 152.686l33.788 33.788a8 8 0 0 0 11.314 0l24.833-24.835a8 8 0 0 0 0-11.313L152.687 128l-33.788-33.788z"
+        fill="currentColor"
+      />
+    </svg>
+  )
+}
+
 export {
   IconEdit,
   IconNextChat,
@@ -503,5 +528,6 @@ export {
   IconShare,
   IconUsers,
   IconExternalLink,
-  IconChevronUpDown
+  IconChevronUpDown,
+  IconCancel
 }
