@@ -1,22 +1,21 @@
 'use client'
-import React, { useState } from 'react'
+import * as React from 'react'
 import { PromptForm } from './prompt-form'
 import { Button } from '@/components/ui/button'
 import {
-  IconCheck,
-  IconCopy,
   IconEdit,
+  IconCopy,
+  IconCheck,
   IconCancel
 } from '@/components/ui/icons'
-
 import { useCopyToClipboard } from '@/lib/hooks/use-copy-to-clipboard'
 import { cn } from '@/lib/utils'
 import { Message } from 'ai'
-import { useEnterSubmit } from '@/lib/hooks/use-enter-submit'
+import { useEditMessage } from '@/lib/hooks/useEditMessage'
 
 interface ChatMessageActionsProps extends React.ComponentProps<'div'> {
-  message: Message // Message to edit or copy to clipboard from actions menu (right side of message)
-  onEdit: (message: string) => void // Callback for editing message
+  message: Message
+  onEdit: (message: string) => void
 }
 
 export function ChatMessageActions({
@@ -26,9 +25,10 @@ export function ChatMessageActions({
   ...props
 }: ChatMessageActionsProps) {
   const { isCopied, copyToClipboard } = useCopyToClipboard({ timeout: 2000 })
-
-  const [isEditing, setIsEditing] = useState(false)
-  const [editedMessage, setEditedMessage] = useState(message.content)
+  const { isEditing, startEditing, stopEditing, editedMessage, handleSave } =
+    useEditMessage({
+      timeout: 2000
+    })
 
   const onCopy = () => {
     if (isCopied) return
@@ -36,22 +36,7 @@ export function ChatMessageActions({
   }
 
   const handleEditClick = () => {
-    setIsEditing(true)
-  }
-
-  const handleSaveClick = async () => {
-    onEdit(editedMessage)
-    setIsEditing(false)
-
-    // Add an async operation here and return a promise
-
-    // For example, you can use a setTimeout to simulate an async operation
-    await new Promise(resolve => setTimeout(resolve, 1000))
-  }
-
-  const handleCancelClick = () => {
-    setEditedMessage(message.content)
-    setIsEditing(false)
+    startEditing(message.content)
   }
 
   return (
@@ -65,27 +50,11 @@ export function ChatMessageActions({
       {isEditing ? (
         <PromptForm
           input={editedMessage}
-          setInput={setEditedMessage}
-          onSubmit={handleSaveClick}
+          setInput={stopEditing}
+          onSubmit={() => handleSave(onEdit)}
           isLoading={false}
         />
       ) : (
-        // <div>
-        //   <input
-        //     className="bg-slate-100"
-        //     type="text"
-        //     value={editedMessage}
-        //     onChange={e => setEditedMessage(e.target.value)}
-        //   />
-        //   <Button variant="ghost" size="icon" onClick={handleSaveClick}>
-        //     <IconCheck />
-        //     <span className="sr-only">Save</span>
-        //   </Button>
-        //   <Button variant="ghost" size="icon" onClick={handleCancelClick}>
-        //     <IconCancel />
-        //     <span className="sr-only">Cancel</span>
-        //   </Button>
-        // </div>
         <div>
           <Button variant="ghost" size="icon" onClick={handleEditClick}>
             <IconEdit />
