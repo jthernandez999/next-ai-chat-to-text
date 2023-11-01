@@ -1,3 +1,4 @@
+'use client'
 import React, { FC, memo, useEffect, useRef, useState } from 'react'
 import {
   IconEdit,
